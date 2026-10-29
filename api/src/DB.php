@@ -21,9 +21,18 @@ class DB
         }
         catch (Throwable $e)
         {
+        	$this->logError($e);
         	throw new Exception("Error connecting to database!");
-            error_log(date("Y-m-d H:i:s") . " | " . $e . PHP_EOL, 3, destination: '../../src/errors.log');
         }
+	}
+
+	private function logError(Throwable $e): void
+	{
+	    error_log(
+	        date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL,
+	        3,
+	        '../../src/errors.log'
+	    );
 	}
 
 	public function create(string $table, array $data): array
@@ -42,7 +51,7 @@ class DB
 		}
 		catch (Throwable $e)
 		{
-			error_log(date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL, 3, '../../src/errors.log');
+			$this->logError($e);
 			return ['success' => false, 'errorCode' => $e->getCode()];
 		}
 	}
@@ -60,7 +69,7 @@ class DB
 		}
 		catch (Throwable $e)
 		{
-			error_log(date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL, 3, '../../src/errors.log');
+			$this->logError($e);
 			return ['success' => false, 'errorCode' => $e->getCode()];
 		}
 	}
@@ -78,7 +87,7 @@ class DB
 		}
 		catch (Throwable $e)
 		{
-			error_log(date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL, 3, '../../src/errors.log');
+			$this->logError($e);
 			return ['success' => false, 'errorCode' => $e->getCode()];
 		}
 	}
@@ -108,7 +117,7 @@ class DB
 		}
 		catch (Throwable $e)
 		{
-			error_log(date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL, 3, '../../src/errors.log');
+			$this->logError($e);
 			return ['success' => false, 'errorCode' => $e->getCode()];
 		}
 	}
@@ -125,7 +134,7 @@ class DB
 		}
 		catch (Throwable $e)
 		{
-			error_log(date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL, 3, '../../src/errors.log');
+			$this->logError($e);
 			return ['success' => false, 'errorCode' => $e->getCode()];
 		}
 	}
@@ -143,7 +152,7 @@ class DB
 		} 	
 		catch (Throwable $e)
 		{
-			error_log(date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL, 3, '../../src/errors.log');
+			$this->logError($e);
 			return ['success' => false, 'errorCode' => $e->getCode()];
 		}
 	}
@@ -174,7 +183,7 @@ class DB
 		}
 		catch (Throwable $e)
 		{
-			error_log(date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL, 3, '../../src/errors.log');
+			$this->logError($e);
 			return ['success' => false, 'errorCode' => $e->getCode()];
 		}
 	}
@@ -202,7 +211,7 @@ class DB
 		}
 		catch (Throwable $e)
 		{
-			error_log(date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL, 3, '../../src/errors.log');
+			$this->logError($e);
 			return ['success' => false, 'errorCode' => $e->getCode()];
 		}
 	}
