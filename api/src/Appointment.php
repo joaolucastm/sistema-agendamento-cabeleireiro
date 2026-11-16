@@ -17,7 +17,7 @@ class Appointment
 
     public function readAll(): array
     {
-        return $this->db->read('*', $this->table, 'WHERE deleted_at IS NULL ORDER BY scheduled_at ASC');
+        return $this->db->read('*', $this->table, 'WHERE deleted_at IS NULL ORDER BY created_at ASC');
     }
 
     public function read(int $id): array

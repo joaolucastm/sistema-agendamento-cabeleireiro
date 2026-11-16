@@ -29,7 +29,7 @@ CREATE TABLE services (
 CREATE TABLE appointments (
     id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     client_id   BIGINT UNSIGNED NOT NULL,
-    service_id  BIGINT UNSIGNED NOT NULL,
+    service_id  BIGINT UNSIGNED NULL,
     start_at    DATETIME NOT NULL,
     end_at      DATETIME NOT NULL,
     status      ENUM('scheduled','confirmed','cancelled','completed') NOT NULL DEFAULT 'scheduled',

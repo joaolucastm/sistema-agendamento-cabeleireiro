@@ -2,23 +2,26 @@
 
 class User
 {
-	public function __construct(
-		private DB $db,
-		private string $table = 'users', 
-	    private string $emailKey = 'email', 
-		private string $passwordKey = 'password'
-	) {}
+	private DB $db,
+	private string $table = 'users', 
+	private string $emailKey = 'email', 
+	private string $passwordKey = 'password'
+
+    public function __construct(DB $db)
+    {
+        $this->db = $db;
+    }
 
 	public function create(string $email, string $password): bool
 	{
 		$data = [
 			$this->emailKey => $email,
-			$this=>passwordKey => password_hash($password, PASSWORD_DEFAULT)
+			$this->passwordKey => password_hash($password, PASSWORD_DEFAULT)
 		];
 
 		$result = $this->db->create($this->table, $data);
 
-		return $result['success'];
+		return $result;
 	}
 	
 	public function login(string $email, string $password): bool
