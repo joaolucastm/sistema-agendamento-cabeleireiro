@@ -1,13 +1,27 @@
 /* =================================
   MENU / HEADER / CABEÇALHO
 ================================= */
-#barber-pole-icon {
-  width: 12px;
+.logo-space {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  border-right: 2px solid #e6e6e6;
+  & > a {
+    width: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
+#barber-pole-logo {
+  width: 16px;
   height: auto;
-  /* padding: 0px 2px; */
 }
 #menu {
   background-color: #ffffff;
+  height: 72px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,35 +29,45 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  gap: 15px;
-  padding: 20px 0px;
   box-shadow: 0 4px 5px -3px rgba(0, 0, 0, 0.2);
+}
+.leftNavBar-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 .leftNavBar {
   display: flex;
   align-items: center;
-  padding: 0px 50px;
-  gap: 10px;
+  padding: 0 clamp(10px, 5vw, 100px);
   & > h1 {
-    font-size: 24px;
+    font-size: clamp(14px, 1.5vw, 24px);
     font-weight: 400;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
+
 .centerNavBar {
   display: flex;
-  gap: 80px;
+  padding: 0 0 0 clamp(10px, 8vw, 300px);
+  gap: clamp(10px, 6vw, 80px);
   & > a {
     color: #000000;
-    font-size: 17px;
+    font-size: clamp(12px, 1.2vw, 17px);
     font-family: "Inter", sans-serif;
     font-weight: 200;
+  }
+  @media (max-width: 768px) {
+    display: none;
   }
 }
 .rightNavBar {
   display: flex;
   align-items: center;
-  padding: 0px 50px;
-  gap: 30px;
+  padding: 0 clamp(10px, 3vw, 50px);
+  gap: clamp(10px, 2vw, 30px);
 }
 button {
   font-family: "Roboto", sans-serif;
