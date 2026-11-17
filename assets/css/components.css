@@ -1,0 +1,60 @@
+/* =================================
+  MENU / HEADER / CABEÇALHO
+================================= */
+#barber-pole-icon {
+  width: 12px;
+  height: auto;
+  /* padding: 0px 2px; */
+}
+#menu {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  gap: 15px;
+  padding: 20px 0px;
+  box-shadow: 0 4px 5px -3px rgba(0, 0, 0, 0.2);
+}
+.leftNavBar {
+  display: flex;
+  align-items: center;
+  padding: 0px 50px;
+  gap: 10px;
+  & > h1 {
+    font-size: 24px;
+    font-weight: 400;
+  }
+}
+.centerNavBar {
+  display: flex;
+  gap: 80px;
+  & > a {
+    color: #000000;
+    font-size: 17px;
+    font-family: "Inter", sans-serif;
+    font-weight: 200;
+  }
+}
+.rightNavBar {
+  display: flex;
+  align-items: center;
+  padding: 0px 50px;
+  gap: 30px;
+}
+button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+.logInButton {
+  background-color: #ffffff;
+}
+.signUpButton {
+  background-color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+}
