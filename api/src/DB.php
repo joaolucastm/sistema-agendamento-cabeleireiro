@@ -31,7 +31,7 @@ class DB
 	    error_log(
 	        date('Y-m-d H:i:s') . ' | ' . $e . PHP_EOL,
 	        3,
-	        '../../src/errors.log'
+	        'errors.log'
 	    );
 	}
 

@@ -9,7 +9,7 @@ CREATE TABLE users (
     role        ENUM('client','admin') NOT NULL DEFAULT 'client',
     name        VARCHAR(150) NULL,
     email       VARCHAR(255) NOT NULL UNIQUE,
-    phone       VARCHAR(20) NOT NULL,
+    phone       VARCHAR(20) NULL,
     password    VARCHAR(255) NOT NULL,
     created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

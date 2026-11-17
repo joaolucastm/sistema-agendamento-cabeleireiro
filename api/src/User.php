@@ -2,17 +2,17 @@
 
 class User
 {
-	private DB $db,
-	private string $table = 'users', 
-	private string $emailKey = 'email', 
-	private string $passwordKey = 'password'
+	private DB $db;
+	private string $table = 'users';
+	private string $emailKey = 'email';
+	private string $passwordKey = 'password';
 
     public function __construct(DB $db)
     {
         $this->db = $db;
     }
 
-	public function create(string $email, string $password): bool
+	public function create(string $email, string $password): array
 	{
 		$data = [
 			$this->emailKey => $email,

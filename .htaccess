@@ -1,0 +1,20 @@
+ServerSignature Off
+Options -Indexes
+RewriteEngine On
+
+ErrorDocument 404 "Oops! Nada aqui. Tente voltar."
+ErrorDocument 403 "Oops! Acesso negado. Tente voltar."
+ErrorDocument 502 "Oops! Houve uma falha de comunicação entre os servidores. Tente recarregar ou volte mais tarde."
+
+# Forces HTTPS
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Set cache to 1 year, except html (1 day) and php (no-store)
+<IfModule mod_headers.c>
+    # Header set Cache-Control "max-age=31536000, immutable"
+
+    <FilesMatch "\.(php|html)$">
+        Header set Cache-Control "no-store"
+    </FilesMatch>
+</IfModule>
