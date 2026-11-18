@@ -1,38 +1,23 @@
 <?php
 
-$accessAllowed = 1;
+// blockAcess();
 
-if (!$accessAllowed)
+function blockAcess($clearSessions = false)
 {
-    $sessionPath = ini_get('session.save_path') . '/sess_*';
-    $files = glob($sessionPath);
+	if ($clearSessions)
+	{
+	    $sessionPath = ini_get('session.save_path') . '/sess_*';
+	    $files = glob($sessionPath);
 
-    foreach ($files as $file)
-    {
-        unlink($file);
-    }
+	    foreach ($files as $file)
+	    {
+	        unlink($file);
+	    }
+	}
 
     http_response_code(403);
     exit;
 }
-
-ini_set('date.timezone', 'America/Sao_Paulo');
-ini_set('display_errors', 1);
-ini_set('session.gc_maxlifetime', 3600);
-
-session_start([
-    'cookie_lifetime'  => 3600,
-    'cookie_path'      => '/',
-    'cookie_domain'    => '',
-    'cookie_secure'    => true,
-    'cookie_httponly'  => true,
-    'cookie_samesite'  => 'Strict',
-    'use_only_cookies' => true,
-    'use_strict_mode'  => true,
-]);
-
-require_once 'src/DB.php';
-require_once 'src/User.php';
 
 function respond(int $status, array $payload): void
 {
@@ -42,10 +27,24 @@ function respond(int $status, array $payload): void
     exit;
 }
 
-// if ($_SERVER['REQUEST_METHOD'] !== 'POST')
-// {
-//     respond(405, ['success' => false, 'message' => 'Method not allowed.']);
-// }
+ini_set('date.timezone', 'America/Sao_Paulo');
+ini_set('display_errors', 1);
+
+ini_set('session.gc_maxlifetime', 3600);
+ini_set('session.cookie_lifetime', '3600');
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_secure', '1');
+ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_samesite', 'Strict');
+ini_set('session.use_only_cookies', '1');
+ini_set('session.use_strict_mode', '1');
+
+session_start();
+
+require_once 'src/DB.php';
+require_once 'src/User.php';
+require_once 'src/Redirect.php';
+require_once 'src/Notification.php';
 
 $dbCredentials = [
     'hostname' => 'localhost',
@@ -57,7 +56,16 @@ $dbCredentials = [
 $db = new DB($dbCredentials);
 $user = new User($db);
 
+if (isset($_GET['logout']))
+{
+	$user->logout();
+	session_start();
+	Notification::set('Desconectado.', 'success');
+	Redirect::to('../index.php');
+}
+
 $action = $_POST['action'] ?? '';
+
 // $publicActions = ['create', 'login'];
 // 
 // if (!in_array($action, $publicActions, true) && empty($_SESSION['loggedUser']))
@@ -67,7 +75,7 @@ $action = $_POST['action'] ?? '';
 
 switch ($action)
 {
-    case 'create':
+    case 'signUp':
 
         if (empty($_POST['email']) || empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['password']))
         {
@@ -83,7 +91,7 @@ switch ($action)
 
         if (!$result['success'])
         {
-            respond(400, $result);
+            respond(400, ['success' => false, 'message' => "Erro ao criar usuário: {$result['errorCode']}"]);
         }
 
         $updated = $db->update('users', ['name' => $name, 'phone' => $phone], ['email' => $email]);
@@ -92,8 +100,10 @@ switch ($action)
         {
             respond(500, ['success' => false, 'message' => 'Usuário criado, mas não foi possível atualizar o perfil.']);
         }
-
-        respond(201, $result);
+		else
+		{
+        	respond(201, ['success' => true, 'message' => 'Usuário criado com sucesso!']);
+		}
 
     case 'login':
 
@@ -107,13 +117,14 @@ switch ($action)
 
         $result = $user->login($email, $password);
 
-        respond($result ? 200 : 401, ['success' => $result]);
-
-    case 'logout':
-
-        $result = $user->logout();
-
-        respond(200, $result);
+		if ($result)
+		{
+        	respond(200, ['success' => true, 'message' => "Autenticado como {$_SESSION['loggedUser']}"]);
+		}
+		else
+		{
+        	respond($result ? 200 : 401, ['success' => false, 'message' => 'Credenciais inválidas.']);
+		}
 
     case 'listUsers':
 

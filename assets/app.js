@@ -43,19 +43,46 @@ async function request(method, url, body = null)
 	}
 }
 
+function notify(style, message)
+{
+	append('body', 'div', `.notification ${style}`, message);
+}
+
+function redirect(url)
+{
+	window.location.href = url;
+}
+
+const api = 'api/';
+
 delegate('#signUp', 'submit', signUp);
 delegate('#login', 'submit', login);
 
 async function login(e)
 {
 	e.preventDefault();
-	console.log(await request('post', 'api/', new FormData(e.target)))
+	const result = await request('post', api, new FormData(e.target));
+	let success;
+	
+	if (result.success)
+	{
+		success = 'success';
+		setTimeout(() => redirect('painel.php'), 1000);
+	}
+	else
+	{
+		success = 'error';
+	}
+	
+	notify(success, result.message);
 }
 
 async function signUp(e)
 {
 	e.preventDefault();
-	console.log(await request('post', 'api/', new FormData(e.target)))
+	const result = await request('post', api, new FormData(e.target));
+	const success = result.success ? 'success' : 'error';
+	notify(success, result.message);
 }
 
 async function listUsers()
@@ -63,11 +90,11 @@ async function listUsers()
 	const data = new FormData();
 	data.append("action", "listUsers");
 
-	const users = await request('post', 'api/', data);
+	const users = await request('post', api, data);
 	
 	users.data.forEach((user, index) => {
 		append('body', 'p', 'class', user.name);
 	});
 }
 
-listUsers();
+// listUsers();
