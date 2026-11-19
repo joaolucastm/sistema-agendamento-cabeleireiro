@@ -43,6 +43,7 @@ session_start();
 
 require_once 'src/DB.php';
 require_once 'src/User.php';
+require_once 'src/Appointment.php';
 require_once 'src/Redirect.php';
 require_once 'src/Notification.php';
 
@@ -55,6 +56,7 @@ $dbCredentials = [
 
 $db = new DB($dbCredentials);
 $user = new User($db);
+$appointment = new Appointment($db);
 
 if (isset($_GET['logout']))
 {
@@ -68,7 +70,7 @@ $action = $_POST['action'] ?? '';
 
 // $publicActions = ['create', 'login'];
 // 
-// if (!in_array($action, $publicActions, true) && empty($_SESSION['loggedUser']))
+// if (!in_array($action, $publicActions, true) && empty($_SESSION['userEmail']))
 // {
 //     respond(401, ['success' => false, 'message' => 'Unauthorized.']);
 // }
@@ -96,13 +98,13 @@ switch ($action)
 
         $updated = $db->update('users', ['name' => $name, 'phone' => $phone], ['email' => $email]);
 
-        if (!$updated['success'])
+        if ($updated['success'])
         {
-            respond(500, ['success' => false, 'message' => 'Usuário criado, mas não foi possível atualizar o perfil.']);
+        	respond(201, ['success' => true, 'message' => 'Usuário criado com sucesso!']);
         }
 		else
 		{
-        	respond(201, ['success' => true, 'message' => 'Usuário criado com sucesso!']);
+            respond(500, ['success' => false, 'message' => 'Usuário criado, mas não foi possível atualizar o perfil.']);
 		}
 
     case 'login':
@@ -119,11 +121,32 @@ switch ($action)
 
 		if ($result)
 		{
-        	respond(200, ['success' => true, 'message' => "Autenticado como {$_SESSION['loggedUser']}"]);
+			
+        	respond(200, ['success' => true, 'message' => "Autenticado como {$_SESSION['userEmail']}. Redirecionando..."]);
 		}
 		else
 		{
         	respond($result ? 200 : 401, ['success' => false, 'message' => 'Credenciais inválidas.']);
+		}
+		
+	case 'createAppointment':
+
+        if (empty($_POST['horario']))
+        {
+            respond(400, ['success' => false, 'message' => 'Um horário é obrigatório.']);
+        }
+
+        $result = $appointment->create([
+        	'' => '',
+       	]);
+
+		if ($result['success'])
+		{
+        	respond(201, ['success' => true, 'message' => 'Agendado com sucesso!']);
+		}
+		else
+		{
+        	respond(400, ['success' => false, 'message' => "Erro ao agendar: {$result['errorCode']}"]);
 		}
 
     case 'listUsers':

@@ -4,7 +4,36 @@ session_start();
 
 require_once 'api/src/Redirect.php';
 
-if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
+if (empty($_SESSION['userEmail'])) Redirect::to('index.php');
+
+function renderDates()
+{
+	$startDate = (new DateTimeImmutable('today'))->modify('+1 week');
+	$endDate = $startDate->modify('+1 month');
+
+	$timeSlots = [
+	    '08:00', '09:00', '10:00', '11:00', '12:00',
+	    '13:00', '14:00', '15:00', '16:00', '17:00'
+	];
+
+	for ($date = $startDate; $date <= $endDate; $date = $date->modify('+1 day'))
+	{
+	    $dayOfWeek = $date->format('N'); // 1 = Monday, 7 = Sunday
+
+	    if ($dayOfWeek >= 6)
+	    {
+	        continue; // Skip Saturday and Sunday
+	    }
+
+	    foreach ($timeSlots as $time)
+	    {
+	        $value = $date->format('Y-m-d') . 'T' . $time;
+	        $label = $date->format('d/m/Y') . ' às ' . $time;
+
+	        echo '<option value="' . $value . '">' . $label . '</option>';
+	    }
+	}	
+}
 
 ?>
 
@@ -16,7 +45,7 @@ if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
     <title>Grupo 16 — Área do Cliente</title>
     <link rel="icon" href="assets/images/barber-pole.svg">
     <link rel="stylesheet" href="assets/style.css">
-    <script defer src='app.js'></script>
+    <script defer src='assets/app.js'></script>
 </head>
 <body>
 
@@ -24,7 +53,7 @@ if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
         <div class="container topo-flex">
             <h2>Grupo 16 — Salão</h2>
             <div class="usuario-box">
-                <span>Olá, <strong><?= $_SESSION['loggedUser'] ?></strong></span>
+                <span>Olá, <strong><?= $_SESSION['userName'] ?></strong></span>
                 <a href="api/?logout" class="btn btn-outline-branco btn-sm">Sair</a>
             </div>
         </div>
@@ -37,19 +66,16 @@ if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
             <h3>Novo Agendamento</h3>
             <p class="subtitulo">Escolha um horário disponível</p>
 
-            <form id='agendamento'>
+            <form id='createAppointment'>
                 <div class="campo">
+    	           	<input type='hidden' name='action' value='createAppointment'>
                     <label for="horario">Qual horário você deseja?</label>
-                    <select id="horario" required>
-                        <option value="1">Corte Feminino — R$ 80,00 (60 min)</option>
-                        <option value="2">Corte Masculino — R$ 45,00 (30 min)</option>
-                        <option value="3">Escova e Hidratação — R$ 70,00 (50 min)</option>
-                        <option value="4">Coloração / Mechas — R$ 180,00 (120 min)</option>
-                        <option value="5">Barba e Acabamento — R$ 35,00 (30 min)</option>
+                    <select id="horario" name='horario' required>
+                    	<?php renderDates() ?>
                     </select>
                 </div>
 
-                <button type="button" class="btn btn-vermelho btn-full btn-lg">Confirmar Agendamento</button>
+                <button type="submit" class="btn btn-vermelho btn-full btn-lg">Agendar</button>
             </form>
         </section>
 
@@ -57,7 +83,6 @@ if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
         <section class="card">
             <div class="card-topo">
                 <h3>Meus Agendamentos</h3>
-                <span class="subtexto">Novembro / 2026</span>
             </div>
 
             <div class="tabela-box">
@@ -65,8 +90,6 @@ if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
                     <thead>
                         <tr>
                             <th>Data / Hora</th>
-                            <th>Serviço</th>
-                            <th>Valor</th>
                             <th>Status</th>
                             <th>Ações</th>
                         </tr>
@@ -74,8 +97,6 @@ if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
                     <tbody>
                         <tr>
                             <td>18/11/2026 às 14:30</td>
-                            <td>Corte Feminino</td>
-                            <td>R$ 80,00</td>
                             <td><span class="badge st-agendado">Agendado</span></td>
                             <td>
                                 <button type="button" class="btn btn-erro btn-sm">Cancelar</button>
@@ -83,8 +104,6 @@ if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
                         </tr>
                         <tr>
                             <td>22/11/2026 às 10:30</td>
-                            <td>Escova e Hidratação</td>
-                            <td>R$ 70,00</td>
                             <td><span class="badge st-confirmado">Confirmado</span></td>
                             <td>
                                 <button type="button" class="btn btn-erro btn-sm">Cancelar</button>
@@ -92,10 +111,8 @@ if (empty($_SESSION['loggedUser'])) Redirect::to('index.php');
                         </tr>
                         <tr>
                             <td>05/11/2026 às 16:00</td>
-                            <td>Coloração / Mechas</td>
-                            <td>R$ 180,00</td>
                             <td><span class="badge st-concluido">Concluído</span></td>
-                            <td>—</td>
+                            <td>N/A</td>
                         </tr>
                     </tbody>
                 </table>

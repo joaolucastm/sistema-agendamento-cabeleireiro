@@ -47,7 +47,7 @@ class DB
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute($data);
 						
-			return ['success' => true, 'affectedRows' => $stmt->rowCount()];
+			return ['success' => true];
 		}
 		catch (Throwable $e)
 		{
@@ -74,16 +74,21 @@ class DB
 		}
 	}
 
-	public function readLogin(string $table, string $email, string $emailKey, string $passwordKey): array
+	public function readLogin(string $table, string $email, string $emailKey, string $idKey, string $nameKey, string $passwordKey): array
 	{
 		try
 		{
-			$sql = "SELECT $passwordKey FROM $table WHERE $emailKey = :$emailKey ";
+			$sql = "SELECT $idKey, $nameKey, $passwordKey, id, name FROM $table WHERE $emailKey = :$emailKey ";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([":$emailKey" => $email]);
-			$hash = $stmt->fetchColumn();
+			$data = $stmt->fetch();
 
-			return ['success' => true, 'data' => $hash];
+			return [
+				'success' => true,
+				'hash' => $data['password'],
+				'id' => $data['id'],
+				'name' => $data['name']
+			];
 		}
 		catch (Throwable $e)
 		{

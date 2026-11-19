@@ -43,6 +43,22 @@ async function request(method, url, body = null)
 	}
 }
 
+async function handleRequest(e)
+{
+	e.preventDefault();
+
+	const result = await request('post', api, new FormData(e.target));
+	const status = result.success ? 'success' : 'error';
+	const btn = e.submitter;
+	
+	btn.disabled = true;
+	setTimeout(() => { if (btn) btn.disabled = false }, 2000);
+	
+	notify(status, result.message);
+	
+	return result.success;
+}
+
 function notify(style, message)
 {
 	append('body', 'div', `.notification ${style}`, message);
@@ -55,35 +71,27 @@ function redirect(url)
 
 const api = 'api/';
 
-delegate('#signUp', 'submit', signUp);
-delegate('#login', 'submit', login);
+delegate('#signUp', 'submit', handleRequest);
+delegate('#login', 'submit', async (e) => {
+	const success = await handleRequest(e);
+	if (success) setTimeout(() => redirect('painel.php'), 1000);
+});
+delegate('#createAppointment', 'submit', handleRequest);
 
-async function login(e)
-{
-	e.preventDefault();
-	const result = await request('post', api, new FormData(e.target));
-	let success;
-	
-	if (result.success)
-	{
-		success = 'success';
-		setTimeout(() => redirect('painel.php'), 1000);
-	}
-	else
-	{
-		success = 'error';
-	}
-	
-	notify(success, result.message);
-}
-
-async function signUp(e)
-{
-	e.preventDefault();
-	const result = await request('post', api, new FormData(e.target));
-	const success = result.success ? 'success' : 'error';
-	notify(success, result.message);
-}
+// async function login(e)
+// {
+// 	handleRequest(e);
+// }
+// 
+// async function signUp(e)
+// {
+// 	handleRequest(e);
+// }
+// 
+// async function createAppointment(e)
+// {
+// 	handleRequest(e);
+// }
 
 async function listUsers()
 {

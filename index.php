@@ -40,9 +40,8 @@ Notification::show();
             <input type="radio" name="acesso" id="tab-admin" class="oculto">
 
             <div class="tabs">
-                <label for="tab-cliente" class="tab lb-cliente">Cliente</label>
+                <label for="tab-cliente" class="tab lb-cliente">Entrar</label>
                 <label for="tab-cadastro" class="tab lb-cadastro">Criar Conta</label>
-                <label for="tab-admin" class="tab lb-admin">Admin</label>
             </div>
 
             <!-- Login Cliente -->
@@ -56,7 +55,7 @@ Notification::show();
                     <label for="cli-senha">Senha</label>
                     <input name='password' type="password" id="cli-senha" placeholder="••••••••" required>
                 </div>
-                <button class="btn btn-vermelho btn-full" type='submit'>Entrar e Agendar</button>
+                <button class="btn btn-vermelho btn-full" type='submit'>Entrar</button>
             </form>
 
             <!-- Cadastro Cliente -->
@@ -79,22 +78,6 @@ Notification::show();
                     <input name='password' type="password" id="cad-senha" placeholder="Mínimo 6 caracteres" required>
                 </div>
                 <button type='submit' href="painel.html" class="btn btn-vermelho btn-full">Concluir Cadastro</button>
-            </form>
-
-            <!-- Login Admin -->
-            <form class="form-tab f-admin">
-                <div class="alerta-admin">
-                    Acesso exclusivo para profissionais e recepção do salão.
-                </div>
-                <div class="campo">
-                    <label for="adm-email">E-mail Corporativo</label>
-                    <input type="email" id="adm-email" placeholder="admin@grupo16.com" required>
-                </div>
-                <div class="campo">
-                    <label for="adm-senha">Senha de Acesso</label>
-                    <input type="password" id="adm-senha" placeholder="••••••••" required>
-                </div>
-                <a href="admin.html" class="btn btn-azul btn-full">Acessar Painel do Salão</a>
             </form>
         </div>
     </div>

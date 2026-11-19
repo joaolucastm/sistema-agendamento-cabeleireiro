@@ -1,0 +1,18 @@
+2026-11-18 20:29:31 | PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /srv/http/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /srv/http/sistema-agendamento-cabeleireiro/api/index.php(138): Appointment->create()
+#3 {main}
+2026-11-18 20:56:11 | PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /srv/http/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /srv/http/sistema-agendamento-cabeleireiro/api/index.php(139): Appointment->create()
+#3 {main}
+2026-11-18 21:12:08 | PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /srv/http/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /srv/http/sistema-agendamento-cabeleireiro/api/index.php(139): Appointment->create()
+#3 {main}

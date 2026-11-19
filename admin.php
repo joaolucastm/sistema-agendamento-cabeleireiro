@@ -1,11 +1,22 @@
+<?php 
+
+session_start();
+
+require_once 'api/src/Redirect.php';
+
+if ($_SESSION['userEmail'] !== 'admin@email.com') Redirect::to('index.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grupo 16 — Painel do Salão</title>
+	<link rel="icon" href="assets/images/barber-pole.svg">
     <link rel="stylesheet" href="assets/style.css">
-    <script defer src='app.js'></script>
+    <script defer src='assets/app.js'></script>
 </head>
 <body>
 
@@ -16,7 +27,7 @@
                 <span class="tag-admin">Admin</span>
             </div>
             <div class="usuario-box">
-                <span>Olá, <strong><?= $_SESSION['loggedUser'] ?></strong></span>
+                <span>Olá, <strong><?= $_SESSION['userEmail'] ?></strong></span>
                 <a href="index.php?logout" class="btn btn-outline-branco btn-sm">Sair</a>
             </div>
         </div>

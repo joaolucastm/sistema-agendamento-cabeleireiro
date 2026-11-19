@@ -5,6 +5,8 @@ class User
 	private DB $db;
 	private string $table = 'users';
 	private string $emailKey = 'email';
+	private string $idKey = 'id';
+	private string $nameKey = 'name';
 	private string $passwordKey = 'password';
 
     public function __construct(DB $db)
@@ -20,19 +22,21 @@ class User
 		];
 
 		$result = $this->db->create($this->table, $data);
-
+	
 		return $result;
 	}
-	
-	public function login(string $email, string $password): bool
+
+    public function login(string $email, string $password): bool
     {
-        $read = $this->db->readLogin($this->table, $email, $this->emailKey, $this->passwordKey);
-        $hash = $read['data']; 
+        $read = $this->db->readLogin($this->table, $email, $this->emailKey, $this->idKey, $this->nameKey, $this->passwordKey);
+        $hash = $read['hash']; 
         
-        if ($read['success'] && $hash && password_verify($password, $hash))
+        if ($read['success'] && password_verify($password, $hash))
         {
             session_regenerate_id(true);
-            $_SESSION['loggedUser'] = $email;
+            $_SESSION['userEmail'] = $email;
+            $_SESSION['userId'] = $read['id'];
+            $_SESSION['userName'] = $read['name'];
             return true;
         }
 
