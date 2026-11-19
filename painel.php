@@ -27,7 +27,7 @@ function renderDates()
 
 	    foreach ($timeSlots as $time)
 	    {
-	        $value = $date->format('Y-m-d') . 'T' . $time;
+	        $value = $date->format('Y-m-d') . " $time";
 	        $label = $date->format('d/m/Y') . ' às ' . $time;
 
 	        echo '<option value="' . $value . '">' . $label . '</option>';
@@ -70,7 +70,7 @@ function renderDates()
                 <div class="campo">
     	           	<input type='hidden' name='action' value='createAppointment'>
                     <label for="horario">Qual horário você deseja?</label>
-                    <select id="horario" name='horario' required>
+                    <select id="horario" name='schedule' required>
                     	<?php renderDates() ?>
                     </select>
                 </div>
@@ -89,20 +89,23 @@ function renderDates()
                 <table class="tabela">
                     <thead>
                         <tr>
+                            <th>N°</th>
                             <th>Data / Hora</th>
                             <th>Status</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id='clientAppointments'>
+<!--                        <tr>
+                            <td>1</td>
                             <td>18/11/2026 às 14:30</td>
-                            <td><span class="badge st-agendado">Agendado</span></td>
+                            <td><span class="badge st-pendente">Pendente</span></td>
                             <td>
                                 <button type="button" class="btn btn-erro btn-sm">Cancelar</button>
                             </td>
                         </tr>
                         <tr>
+                            <td>2</td>
                             <td>22/11/2026 às 10:30</td>
                             <td><span class="badge st-confirmado">Confirmado</span></td>
                             <td>
@@ -110,10 +113,11 @@ function renderDates()
                             </td>
                         </tr>
                         <tr>
+                            <td>3</td>
                             <td>05/11/2026 às 16:00</td>
                             <td><span class="badge st-concluido">Concluído</span></td>
                             <td>N/A</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>

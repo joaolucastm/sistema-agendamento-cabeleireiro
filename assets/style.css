@@ -477,7 +477,7 @@ input:focus, select:focus {
 .tabela th { font-weight: 600; color: var(--azul-medio); font-size: 0.8rem; text-transform: uppercase; }
 
 .badge { display: inline-block; padding: 0.25rem 0.65rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
-.st-agendado { background: var(--aviso-bg); color: var(--aviso-txt); }
+.st-pendente { background: var(--aviso-bg); color: var(--aviso-txt); }
 .st-confirmado { background: var(--verde-bg); color: var(--verde-txt); }
 .st-cancelado { background: var(--erro-bg); color: var(--erro-txt); }
 .st-concluido { background: var(--info-bg); color: var(--info-txt); }
@@ -527,6 +527,11 @@ input:focus, select:focus {
     }
 }
 
+tr
+{
+	animation: fade 1s;	
+}
+
 .notification {
 	  font-family: var(--primary-font), sans-serif;
 	  font-size: 1rem;
@@ -565,3 +570,12 @@ input:focus, select:focus {
     }
 }
 
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

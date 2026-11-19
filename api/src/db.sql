@@ -19,7 +19,7 @@ CREATE TABLE users (
 CREATE TABLE appointments (
     id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     client_id   BIGINT UNSIGNED NOT NULL,
-    schedule    DATETIME NOT NULL,
+    schedule    DATETIME UNIQUE NOT NULL,
     status      ENUM('Pendente','Confirmado','Cancelado','Concluído') NOT NULL DEFAULT 'Pendente',
     created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
