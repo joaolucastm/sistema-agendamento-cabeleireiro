@@ -54,7 +54,15 @@ $dbCredentials = [
     'database' => 'scheduling',
 ];
 
-$db = new DB($dbCredentials);
+try
+{
+	$db = new DB($dbCredentials);
+}
+catch (Exception $e)
+{
+	respond(500, ['success' => false, 'message' => $e->getMessage()]);
+}
+
 $user = new User($db);
 $appointment = new Appointment($db);
 
@@ -93,7 +101,7 @@ switch ($action)
 
         if (!$result['success'])
         {
-            respond(400, ['success' => false, 'message' => "Erro ao criar usuário: {$result['errorCode']}"]);
+            respond(400, ['success' => false, 'message' => "Erro ao criar usuário: {$result['errorCode']}."]);
         }
 
         $updated = $db->update('users', ['name' => $name, 'phone' => $phone], ['email' => $email]);
@@ -121,8 +129,7 @@ switch ($action)
 
 		if ($result)
 		{
-			
-        	respond(200, ['success' => true, 'message' => "Autenticado como {$_SESSION['userEmail']}. Redirecionando..."]);
+        	respond(200, ['success' => true, 'message' => "Autenticado como {$_SESSION['userEmail']}."]);
 		}
 		else
 		{
@@ -131,13 +138,14 @@ switch ($action)
 		
 	case 'createAppointment':
 
-        if (empty($_POST['horario']))
+        if (empty($_POST['schedule']))
         {
             respond(400, ['success' => false, 'message' => 'Um horário é obrigatório.']);
         }
 
         $result = $appointment->create([
-        	'' => '',
+        	'client_id' => $_SESSION['userId'],
+        	'schedule' => $_POST['schedule'],
        	]);
 
 		if ($result['success'])
@@ -146,14 +154,22 @@ switch ($action)
 		}
 		else
 		{
-        	respond(400, ['success' => false, 'message' => "Erro ao agendar: {$result['errorCode']}"]);
+        	respond(400, ['success' => false, 'message' => "Erro ao agendar: {$result['errorCode']}."]);
 		}
 
-    case 'listUsers':
+    case 'listClientAppointments':
 
-        $result = $db->read('*', 'users');
+        $result = $appointment->readClient();
 
-        respond(200, $result);
+		if ($result['success'])
+		{
+			$result['message'] = 'Agendamentos listados.';
+        	respond(200, $result);
+		}
+		else
+		{
+        	respond(400, ['success' => false, 'message' => "Erro ao listar agendamentos: {$result['errorCode']}."]);
+		}
 
     default:
 
