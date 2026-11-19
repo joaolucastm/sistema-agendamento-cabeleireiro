@@ -1,0 +1,6 @@
+2026-11-18 23:53:50 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-26 08:00:00' for key 'schedule' in /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /srv/http/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /srv/http/sistema-agendamento-cabeleireiro/api/index.php(146): Appointment->create()
+#3 {main}
