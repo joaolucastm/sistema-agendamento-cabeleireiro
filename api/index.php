@@ -42,17 +42,11 @@ ini_set('session.use_strict_mode', '1');
 session_start();
 
 require_once 'src/DB.php';
+require_once 'src/dbCredentials.php';
 require_once 'src/User.php';
 require_once 'src/Appointment.php';
 require_once 'src/Redirect.php';
 require_once 'src/Notification.php';
-
-$dbCredentials = [
-    'hostname' => 'localhost',
-    'username' => 'http',
-    'password' => '',
-    'database' => 'scheduling',
-];
 
 try
 {
@@ -143,6 +137,13 @@ switch ($action)
             respond(400, ['success' => false, 'message' => 'Um horário é obrigatório.']);
         }
 
+		$read = $appointment->checkAvailable($_POST['schedule']);
+
+		if ($read['success'] && !empty($read['data']))
+		{
+        	respond(400, ['success' => false, 'message' => 'Horário já agendado!']);
+		}
+		
         $result = $appointment->create([
         	'client_id' => $_SESSION['userId'],
         	'schedule' => $_POST['schedule'],
@@ -169,6 +170,20 @@ switch ($action)
 		else
 		{
         	respond(400, ['success' => false, 'message' => "Erro ao listar agendamentos: {$result['errorCode']}."]);
+		}
+
+    case 'cancelAppointment':
+
+        $result = $appointment->update($_POST['id'], ['status' => 'Cancelado']);
+
+		if ($result['success'])
+		{
+			if ($result['affectedRows'] > 0) respond(200, ['success' => true, 'message' => 'Cancelado com sucesso!']);
+			else respond(400, ['success' => false, 'message' => 'Já está cancelado.']);
+		}
+		else
+		{
+        	respond(400, ['success' => false, 'message' => "Erro ao cancelar: {$result['errorCode']}."]);
 		}
 
     default:

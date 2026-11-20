@@ -85,9 +85,9 @@ class DB
 
 			return [
 				'success' => true,
-				'hash' => $data['password'],
-				'id' => $data['id'],
-				'name' => $data['name']
+				'hash' => $data['password'] ?? null,
+				'id' => $data['id'] ?? null,
+				'name' => $data['name'] ?? null
 			];
 		}
 		catch (Throwable $e)

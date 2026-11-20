@@ -208,7 +208,7 @@ a {
     position: fixed;
     inset: 0;
     background: rgba(20, 39, 64, 0.7);
-    backdrop-filter: blur(3px);
+    /* backdrop-filter: blur(3px); */
     display: none;
     align-items: center;
     justify-content: center;

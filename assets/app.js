@@ -95,6 +95,9 @@ delegate('#login', 'submit', async (e) => {
 delegate('#createAppointment', 'submit', async (e) => {
 	await handleRequest(e) && listClientAppointments();
 });
+delegate('#cancelAppointment', 'submit', async (e) => {
+	await handleRequest(e) && listClientAppointments();
+});
 
 async function listClientAppointments()
 {

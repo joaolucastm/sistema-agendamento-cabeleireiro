@@ -20,14 +20,24 @@ class Appointment
         return $this->db->read('*', $this->table, 'WHERE deleted_at IS NULL ORDER BY created_at ASC');
     }
 
+	public function readScheduleds(): array
+    {
+        return $this->db->read('*', $this->table, 'WHERE status != \'Cancelado\' AND deleted_at IS NULL ORDER BY created_at ASC');
+    }
+    
+    public function checkAvailable($value): array
+    {
+        return $this->db->read('*', $this->table, "WHERE schedule = '$value' AND status != 'Cancelado' AND deleted_at IS NULL");
+    }
+
     public function readClient(): array
     {
         return $this->db->read('*', $this->table, "WHERE deleted_at IS NULL AND client_id = {$_SESSION['userId']} ORDER BY created_at DESC");
     }
 
-    public function read(int $id): array
+    public function read($column, $value): array
     {
-        return $this->db->read('*', $this->table, "WHERE id = $id AND deleted_at IS NULL");
+        return $this->db->read('*', $this->table, "WHERE $column = '$value' AND deleted_at IS NULL");
     }
 
     public function update(int $id, array $data): array

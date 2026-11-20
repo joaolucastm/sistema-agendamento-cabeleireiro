@@ -1,6 +1,120 @@
-2026-11-18 23:53:50 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-26 08:00:00' for key 'schedule' in /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+2026-11-20 09:36:10 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'joao@email' for key 'email' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
 Stack trace:
-#0 /srv/http/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
-#1 /srv/http/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
-#2 /srv/http/sistema-agendamento-cabeleireiro/api/index.php(146): Appointment->create()
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/User.php(24): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(100): User->create()
+#3 {main}
+2026-11-20 15:26:09 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-27 08:00:00' for key 'schedule' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->create()
+#3 {main}
+2026-11-20 15:32:06 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-27 08:00:00' for key 'schedule' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->create()
+#3 {main}
+2026-11-20 15:52:43 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-30 10:00:00' for key 'schedule' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->create()
+#3 {main}
+2026-11-20 15:55:11 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-27 08:00:00' for key 'schedule' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->create()
+#3 {main}
+2026-11-20 16:02:10 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '08:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:02:17 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '08:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:03:39 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '08:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:03:39 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-27 08:00:00' for key 'schedule' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(147): Appointment->create()
+#3 {main}
+2026-11-20 16:07:30 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '08:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:07:30 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-27 08:00:00' for key 'schedule' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(147): Appointment->create()
+#3 {main}
+2026-11-20 16:08:22 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '08:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:08:48 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '08:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:08:48 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2026-11-27 08:00:00' for key 'schedule' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(15): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(147): Appointment->create()
+#3 {main}
+2026-11-20 16:09:53 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '08:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:10:57 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '09:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:11:22 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '10:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:13:36 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '10:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:14:10 | PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '11:00:00 AND deleted_at IS NULL' at line 1 in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:65
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(65): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/Appointment.php(35): DB->read()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(140): Appointment->read()
+#3 {main}
+2026-11-20 16:35:18 | PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'maria@email.com' for key 'email' in /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php:48
+Stack trace:
+#0 /var/www/html/sistema-agendamento-cabeleireiro/api/src/DB.php(48): PDOStatement->execute()
+#1 /var/www/html/sistema-agendamento-cabeleireiro/api/src/User.php(24): DB->create()
+#2 /var/www/html/sistema-agendamento-cabeleireiro/api/index.php(94): User->create()
 #3 {main}

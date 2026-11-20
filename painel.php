@@ -6,33 +6,50 @@ require_once 'api/src/Redirect.php';
 
 if (empty($_SESSION['userEmail'])) Redirect::to('index.php');
 
+
 function renderDates()
 {
+	require_once 'api/src/DB.php';
+	require_once 'api/src/dbCredentials.php';
+	require_once 'api/src/Appointment.php';
+	
 	$startDate = (new DateTimeImmutable('today'))->modify('+1 week');
 	$endDate = $startDate->modify('+1 month');
+	$dates = '';
+	
+	$db = new DB($dbCredentials);
+	$appointment = new Appointment($db);
+	$scheduleds = array_column($appointment->readScheduleds()['data'], 'schedule');
 
 	$timeSlots = [
-	    '08:00', '09:00', '10:00', '11:00', '12:00',
-	    '13:00', '14:00', '15:00', '16:00', '17:00'
+	    '08:00:00', '09:00:00', '10:00:00', '11:00:00',
+	    '13:00:00', '14:00:00', '15:00:00', '16:00:00', '17:00:00'
 	];
 
 	for ($date = $startDate; $date <= $endDate; $date = $date->modify('+1 day'))
 	{
 	    $dayOfWeek = $date->format('N'); // 1 = Monday, 7 = Sunday
 
-	    if ($dayOfWeek >= 6)
-	    {
-	        continue; // Skip Saturday and Sunday
-	    }
+	    if ($dayOfWeek >= 6) continue; // Skip Saturday and Sunday
 
 	    foreach ($timeSlots as $time)
 	    {
 	        $value = $date->format('Y-m-d') . " $time";
+
 	        $label = $date->format('d/m/Y') . ' às ' . $time;
 
-	        echo '<option value="' . $value . '">' . $label . '</option>';
+			if (in_array ($value, $scheduleds))
+			{
+	        	$dates .= "<option disabled value='$value'>$label</option>";
+			}
+	        else
+	        {
+	        	$dates .= "<option value='$value'>$label</option>";
+	        }
 	    }
-	}	
+	}
+
+	return $dates;
 }
 
 ?>
@@ -71,7 +88,7 @@ function renderDates()
     	           	<input type='hidden' name='action' value='createAppointment'>
                     <label for="horario">Qual horário você deseja?</label>
                     <select id="horario" name='schedule' required>
-                    	<?php renderDates() ?>
+                    	<?= renderDates() ?>
                     </select>
                 </div>
 
