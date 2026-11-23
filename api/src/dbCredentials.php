@@ -3,6 +3,6 @@
 $dbCredentials = [
     'hostname' => 'localhost',
     'username' => 'http',
-    'password' => 'uma_senha_forte',
+    'password' => '',
     'database' => 'scheduling',
 ];

@@ -27,8 +27,8 @@ function respond(int $status, array $payload): void
     exit;
 }
 
+ini_set('display_errors', 0);
 ini_set('date.timezone', 'America/Sao_Paulo');
-ini_set('display_errors', 1);
 
 ini_set('session.gc_maxlifetime', 3600);
 ini_set('session.cookie_lifetime', '3600');
@@ -172,6 +172,34 @@ switch ($action)
         	respond(400, ['success' => false, 'message' => "Erro ao listar agendamentos: {$result['errorCode']}."]);
 		}
 
+	case 'listAppointments':
+
+		$result = $appointment->readAll();
+
+		if ($result['success'])
+		{
+			$result['message'] = 'Agendamentos listados.';
+	       	respond(200, $result);
+		}
+		else
+		{
+	       	respond(400, ['success' => false, 'message' => "Erro ao listar agendamentos: {$result['errorCode']}."]);
+		}
+
+    case 'confirmAppointment':
+
+        $result = $appointment->update($_POST['id'], ['status' => 'Confirmado']);
+
+		if ($result['success'])
+		{
+			if ($result['affectedRows'] > 0) respond(200, ['success' => true, 'message' => 'Confirmado com sucesso!']);
+			else respond(400, ['success' => false, 'message' => 'Já está confirmado.']);
+		}
+		else
+		{
+        	respond(400, ['success' => false, 'message' => "Erro ao confirmar: {$result['errorCode']}."]);
+		}
+		
     case 'cancelAppointment':
 
         $result = $appointment->update($_POST['id'], ['status' => 'Cancelado']);

@@ -17,7 +17,14 @@ class Appointment
 
     public function readAll(): array
     {
-        return $this->db->read('*', $this->table, 'WHERE deleted_at IS NULL ORDER BY created_at ASC');
+		$result = $this->db->read('appointments.*, users.name, users.phone', $this->table, 'JOIN users ON appointments.client_id = users.id WHERE appointments.deleted_at IS NULL ORDER BY created_at ASC');
+		
+    	foreach ($result['data'] as &$item)
+    	{
+    		$item['schedule'] = (new DateTime($item['schedule']))->format('d/m/y à\s H:i');
+    	}
+    	
+        return $result;
     }
 
 	public function readScheduleds(): array
@@ -32,7 +39,14 @@ class Appointment
 
     public function readClient(): array
     {
-        return $this->db->read('*', $this->table, "WHERE deleted_at IS NULL AND client_id = {$_SESSION['userId']} ORDER BY created_at DESC");
+		$result = $this->db->read('*', $this->table, "WHERE deleted_at IS NULL AND client_id = {$_SESSION['userId']} ORDER BY created_at DESC");
+
+		foreach ($result['data'] as &$item)
+		{
+			$item['schedule'] = (new DateTime($item['schedule']))->format('d/m/y à\s H:i');
+		}
+		
+        return $result;
     }
 
     public function read($column, $value): array

@@ -403,6 +403,10 @@ input:focus, select:focus {
     margin-bottom: 2.5rem;
 }
 
+.admin-card {
+	margin: 1rem;
+}
+
 .card {
     background: var(--branco);
     border: 1px solid var(--borda);
@@ -473,7 +477,7 @@ input:focus, select:focus {
 /* Tabela e badges */
 .tabela-box { overflow-x: auto; }
 .tabela { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-.tabela th, .tabela td { padding: 0.8rem 0.75rem; text-align: center; border-bottom: 1px solid var(--borda); }
+.tabela th, .tabela td { padding: 0.8rem 0.75rem; text-align: center; border-bottom: 1px solid var(--borda); justify-content: center; }
 .tabela th { font-weight: 600; color: var(--azul-medio); font-size: 0.8rem; text-transform: uppercase; }
 
 .badge { display: inline-block; padding: 0.25rem 0.65rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }

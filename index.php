@@ -108,65 +108,60 @@ Notification::show();
         </div>
 
         <div class="grid-servicos">
-            <article class="card-servico">
-                <div class="servico-topo">
-                    <h3>Corte Feminino</h3>
-                    <span class="preco">R$ 80,00</span>
-                </div>
-                <p class="subtexto">Lavagem, corte personalizado e finalização com secador.</p>
-                <div class="servico-rodape">
-                    <span>Duração: <strong>60 min</strong></span>
-                    <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
-                </div>
-            </article>
+			<article class="card-servico">
+			    <div class="servico-topo">
+			        <h3>Corte Feminino</h3>
+			        <span class="preco">R$ 80,00</span>
+			    </div>
+			    <p class="subtexto">Lavagem, corte personalizado e finalização com secador.</p>
+			    <div class="servico-rodape">
+			        <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
+			    </div>
+			</article>
 
-            <article class="card-servico">
-                <div class="servico-topo">
-                    <h3>Corte Masculino</h3>
-                    <span class="preco">R$ 45,00</span>
-                </div>
-                <p class="subtexto">Corte na tesoura ou máquina com acabamento na navalha.</p>
-                <div class="servico-rodape">
-                    <span>Duração: <strong>30 min</strong></span>
-                    <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
-                </div>
-            </article>
+			<article class="card-servico">
+			    <div class="servico-topo">
+			        <h3>Corte Masculino</h3>
+			        <span class="preco">R$ 45,00</span>
+			    </div>
+			    <p class="subtexto">Corte na tesoura ou máquina com acabamento na navalha.</p>
+			    <div class="servico-rodape">
+			        <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
+			    </div>
+			</article>
 
-            <article class="card-servico">
-                <div class="servico-topo">
-                    <h3>Escova e Hidratação</h3>
-                    <span class="preco">R$ 70,00</span>
-                </div>
-                <p class="subtexto">Tratamento nutritivo profundo + escova modelada.</p>
-                <div class="servico-rodape">
-                    <span>Duração: <strong>50 min</strong></span>
-                    <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
-                </div>
-            </article>
+			<article class="card-servico">
+			    <div class="servico-topo">
+			        <h3>Escova e Hidratação</h3>
+			        <span class="preco">R$ 70,00</span>
+			    </div>
+			    <p class="subtexto">Tratamento nutritivo profundo + escova modelada.</p>
+			    <div class="servico-rodape">
+			        <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
+			    </div>
+			</article>
 
-            <article class="card-servico">
-                <div class="servico-topo">
-                    <h3>Coloração / Mechas</h3>
-                    <span class="preco">R$ 180,00</span>
-                </div>
-                <p class="subtexto">Aplicação completa, tonalização e tratamento pós-química.</p>
-                <div class="servico-rodape">
-                    <span>Duração: <strong>120 min</strong></span>
-                    <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
-                </div>
-            </article>
+			<article class="card-servico">
+			    <div class="servico-topo">
+			        <h3>Coloração / Mechas</h3>
+			        <span class="preco">R$ 180,00</span>
+			    </div>
+			    <p class="subtexto">Aplicação completa, tonalização e tratamento pós-química.</p>
+			    <div class="servico-rodape">
+			        <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
+			    </div>
+			</article>
 
-            <article class="card-servico">
-                <div class="servico-topo">
-                    <h3>Barba e Acabamento</h3>
-                    <span class="preco">R$ 35,00</span>
-                </div>
-                <p class="subtexto">Toalha quente, alinhamento e hidratação dos fios.</p>
-                <div class="servico-rodape">
-                    <span>Duração: <strong>30 min</strong></span>
-                    <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
-                </div>
-            </article>
+			<article class="card-servico">
+			    <div class="servico-topo">
+			        <h3>Barba e Acabamento</h3>
+			        <span class="preco">R$ 35,00</span>
+			    </div>
+			    <p class="subtexto">Toalha quente, alinhamento e hidratação dos fios.</p>
+			    <div class="servico-rodape">
+			        <label for="modal-login" class="link-agendar">Agendar &rarr;</label>
+			    </div>
+			</article>
         </div>
     </main>
 

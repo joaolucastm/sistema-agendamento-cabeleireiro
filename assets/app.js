@@ -2,9 +2,9 @@ const $ = selector => document.querySelector(selector);
 
 const $$ = selector => document.querySelectorAll(selector);
 
-const on = (selector, event, callback) => {
-	$$(selector).forEach(el => el.addEventListener(event, callback));
-};
+// const on = (selector, event, callback) => {
+// 	$$(selector).forEach(el => el.addEventListener(event, callback));
+// };
 
 const delegate = (selector, event, callback) => { 
 	document.addEventListener(event, eventObject => {
@@ -86,18 +86,39 @@ function normalizeText(text) {
 
 
 const api = 'api/';
+const page = getPage();
 
 delegate('#signUp', 'submit', handleRequest);
 delegate('#login', 'submit', async (e) => {
 	const success = await handleRequest(e);
-	if (success) setTimeout(() => redirect('painel.php'), 1000);
+	if (success) 
+	{
+		if ($('#cli-email').value === 'admin@email.com')
+		{
+			setTimeout(() => redirect('admin.php'), 1000);
+		}
+		else
+		{
+			setTimeout(() => redirect('painel.php'), 1000);
+		}
+		
+	}
 });
 delegate('#createAppointment', 'submit', async (e) => {
 	await handleRequest(e) && listClientAppointments();
 });
-delegate('#cancelAppointment', 'submit', async (e) => {
-	await handleRequest(e) && listClientAppointments();
+delegate('.cancelAppointment', 'submit', async (e) => {
+	await handleRequest(e) && refreshData();
 });
+delegate('.confirmAppointment', 'submit', async (e) => {
+	await handleRequest(e) && refreshData();
+});
+
+function refreshData()
+{
+	if (page === 'painel.php') listClientAppointments();
+	if (page === 'admin.php') listAppointments();
+}
 
 async function listClientAppointments()
 {
@@ -124,7 +145,7 @@ async function listClientAppointments()
 			<td>${item.schedule}</td>
             <td><span class="badge st-${normStatus}">${item.status}</span></td>
             <td>
-            	<form id='cancelAppointment'>
+            	<form class='cancelAppointment'>
      	    		<input type='hidden' name='action' value='cancelAppointment'>
      	    		<input type='hidden' name='id' value='${item.id}'>
                 	<button type="submit" class="btn btn-erro btn-sm">Cancelar</button>
@@ -135,6 +156,49 @@ async function listClientAppointments()
 	});
 }
 
-const page = getPage();
+async function listAppointments()
+{
+	const data = new FormData();
+	data.append("action", "listAppointments");
 
-if (page === 'painel.php') listClientAppointments();
+	const result = await request('post', api, data);
+
+	if (!result.success)
+	{
+		notify(result.success ? 'success' : 'error', result.message); 
+		return;
+	}
+	
+	$('#appointments').innerHTML = '';
+	
+	result.data.forEach((item, index) => {
+		const normStatus = normalizeText(item.status);
+	
+		append('#appointments', 'tr', '', `
+
+
+			<td>${item.id}</td>
+			<td>${item.schedule}</td>
+			<td>${item.name}</td>
+			<td>${item.phone}</td>
+            <td><span class="badge st-${normStatus}">${item.status}</span></td>
+            <td class="acoes">
+            	<form class='confirmAppointment'>
+     	    		<input type='hidden' name='action' value='confirmAppointment'>
+     	    		<input type='hidden' name='id' value='${item.id}'>
+            		<button type="submit" class="btn btn-verde btn-sm">Confirmar</button>
+            	</form>
+           	</td>
+            <td>
+	            <form class='cancelAppointment'>
+	   	    		<input type='hidden' name='action' value='cancelAppointment'>
+	   	    		<input type='hidden' name='id' value='${item.id}'>
+	            	<button type="submit" class="btn btn-erro btn-sm">Cancelar</button>
+	            </form>
+           	</td>
+            
+		`);
+	});
+}
+
+refreshData();

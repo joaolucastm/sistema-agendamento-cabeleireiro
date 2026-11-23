@@ -10,9 +10,9 @@ ErrorDocument 502 "Oops! Houve uma falha de comunicação entre os servidores. T
 # RewriteCond %{HTTPS} off
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Set cache to 1 year, except php (no-store)
+# Set cache to 1 day, except php (no-store)
 <IfModule mod_headers.c>
-    Header set Cache-Control "max-age=31536000, immutable"
+    Header set Cache-Control "max-age=86400, immutable"
 
     <FilesMatch "\.php$">
         Header set Cache-Control "no-store"
