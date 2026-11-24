@@ -12,6 +12,8 @@ O login de admin (visão do cabeleireiro) pode ser acessado para teste com as cr
 - Email: admin@email.com
 - Senha: admin
 
+O video de demonstração final pode ser baixado da raiz do projeto: demonstracao_final.mp4
+
 ## Screenshot
 
 ![Tela do Admin](assets/images/demo.png)
