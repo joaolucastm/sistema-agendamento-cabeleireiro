@@ -1,5 +1,5 @@
 # sistema-agendamento-cabeleireiro
-Projeto integrador do curso de TADS do Senac
+## Projeto integrador do curso de TADS do Senac
 
 Link para projeto hospedado: [https://sistema-agendamento-cabeleireiro.rf.gd/](https://sistema-agendamento-cabeleireiro.rf.gd/)
 
@@ -8,3 +8,8 @@ O sistema consiste em uma api PHP com MariaDB/MySQL que responde à requisiçõe
 O login de admin (visão do cabeleireiro) pode ser acessado para teste com as credenciais:
 - Email: admin@email.com
 - Senha: admin
+
+## Screenshot
+
+![Tela do Admin](assets/images/demo.png)
+
